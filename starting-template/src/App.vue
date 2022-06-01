@@ -1,11 +1,10 @@
 <template>
-    <div id="app">
+    <div>
 
         <app-header/>
 
         <div class="container">
             <h1 class="pt-3 pb-3">Персонажи Marvel</h1>
-
             <pre>characterIndex: {{characterIndex}}</pre>
 
             <app-modal :character = "characters[characterIndex]"/>
@@ -13,29 +12,34 @@
             <spinner/>
 
             <div class="row">
-                <div class="card mb-3" style="max-width: 540px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img :src="el.thumbnail" 
-               :alt="el.name"
-               style="max-width: 100%;">
+                <div v-for="(el, idx) in characters"
+                :key="el.id"
+                class="card mb-3 col-sm-12 col-md-6 col-lg-4">
+            <div class="row g-0">
+                <div class="col-4">
+                    <img :src="el.thumbnail"
+                         :alt="el.name"
+                         style="max-width: 100%;"
+                    >
+                </div>
+                <div class="col-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{el.name}}</h5>
+                        <button type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"
+                                class="btn btn-danger btn-sm"
+                                @click="characterIndex = idx"
+                        >
+                            Подробнее
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div v-for="(el, idx) in characters"
-            :key="el.id"
-            class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">{{el.name}}</h5>
-                <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                    @click="characterIndex = idx">Подробнее  
-                    </button>
-              </div>
-            </div>
-          </div>
         </div>
-            </div>
         </div>
 
+    </div>
     </div>
 </template>
 

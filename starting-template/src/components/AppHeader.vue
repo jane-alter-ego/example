@@ -1,13 +1,22 @@
 <template>
-    <nav class="navbar navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand">Marvel</a>
+   <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand">Marvel</a>
         <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Поиск..." aria-label="Search">
-          <button class="btn btn-danger" type="submit">Все</button>
+            <input type="search"
+                   placeholder="Поиск..."
+                   aria-label="Search"
+                   class="form-control me-2"
+            >
+            <button
+                    type="reset"
+                    class="btn btn-danger"
+            >
+                все
+            </button>
         </form>
-      </div>
-    </nav>
+    </div>
+</nav>
 </template>
 
 <script>
