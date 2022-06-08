@@ -1,12 +1,14 @@
 <template>
    <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a href="#" class="navbar-brand">Marvel</a>
+        <a href="#" class="navbar-brand">Marvel {{search}}</a>
         <form class="d-flex">
             <input type="search"
                    placeholder="Поиск..."
                    aria-label="Search"
                    class="form-control me-2"
+                   v-model = "search"
+                   @input = "changeSearch(search)"
             >
             <button
                     type="reset"
@@ -22,8 +24,10 @@
 <script>
     export default {
         name: "AppHeader",
+        props: ['changeSearch'],
         data() {
             return {
+                search: '',
             }
         },
     }

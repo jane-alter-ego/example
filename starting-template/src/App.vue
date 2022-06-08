@@ -1,18 +1,19 @@
 <template>
     <div>
 
-        <app-header/>
+        <app-header :changeSearch = "changeSearch"/>
 
         <div class="container">
             <h1 class="pt-3 pb-3">Персонажи Marvel</h1>
-            <pre>characterIndex: {{characterIndex}}</pre>
+            
+            <pre>search: {{search}}</pre>
 
-            <app-modal :character = "characters[characterIndex]"/>
+            <app-modal :character = "searchCharacters[characterIndex]"/>
 
-            <spinner/>
+            <spinner v-if = "loading"/>
 
             <div class="row">
-                <div v-for="(el, idx) in characters"
+                <div v-for="(el, idx) in searchCharacters"
                 :key="el.id"
                 class="card mb-3 col-sm-12 col-md-6 col-lg-4">
             <div class="row g-0">
@@ -60,18 +61,32 @@
                 loading: false,
                 characters: [],
                 characterIndex: 0,
+                search: '',
             }
         },
         methods: {
             fetchCharacters: function (){
-                fetch('https://netology-api-marvel.herokuapp.com/characters')
+                return fetch('https://netology-api-marvel.herokuapp.com/characters')
                 .then(res => res.json())
                 .then(json => this.characters = json);
+            },
+            changeSearch: function(value){
+                this.search = value
+            },
+        },
+        computed: {
+            searchCharacters: function(){
+                const {characters, search} = this
+                return characters.filter(character => {
+                    return character.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+                }
+                )
             }
         },
-        computed: {},
-        mounted(){
-            this.fetchCharacters();
+        async mounted(){
+            this.loading = true;
+            await this.fetchCharacters();
+            this.loading = false;
         }
     }
 </script>
