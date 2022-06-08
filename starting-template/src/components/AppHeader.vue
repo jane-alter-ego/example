@@ -13,6 +13,7 @@
             <button
                     type="reset"
                     class="btn btn-danger"
+                    @click= "() => {search = ''; changeSearch(search)}"
             >
                 все
             </button>
